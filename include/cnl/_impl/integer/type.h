@@ -7,6 +7,7 @@
 #if !defined(CNL_IMPL_INTEGER_TYPE_H)
 #define CNL_IMPL_INTEGER_TYPE_H
 
+#include "can_convert_tag_family.h"
 #include "is_integer.h"
 #include "../num_traits/from_value.h"
 #include "../operators/generic.h"
@@ -28,9 +29,10 @@ namespace cnl {
             integer() = default;
 
             /// constructor taking an _impl::integer type
-            template<typename RhsRep>
-            constexpr integer(integer<RhsRep, Tag> const& i)
-                    : _rep(convert<tag, Rep>(to_rep(i)))
+            template<typename RhsRep, class RhsTag,
+                    enable_if_t<can_convert_tag_family<Tag, RhsTag>::value, int> = 0>
+            constexpr integer(integer<RhsRep, RhsTag> const& i)
+                    : _rep(convert<Tag, Rep>(to_rep(i)))
             {
             }
 

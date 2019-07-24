@@ -113,7 +113,7 @@ namespace cnl {
         CNL_RELAXED_CONSTEXPR scaled_integer& operator=(scaled_integer<FromRep, FromScale> const& rhs)
         {
             _base::operator=(convert<decltype(FromScale{}/scale{}), Rep>(
-                            _impl::from_value<Rep>(cnl::_impl::to_rep(rhs))));
+                            from_value<Rep, FromRep>{}(cnl::_impl::to_rep(rhs))));
             return *this;
         }
 
