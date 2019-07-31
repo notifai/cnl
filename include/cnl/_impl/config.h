@@ -175,7 +175,7 @@
 #else
 // Either CNL_USE_IOSTREAM or __STDC_HOSTED__
 // must be defined and set to either 0 or 1.
-#error __STDC_HOSTED__ not defined
+//#error __STDC_HOSTED__ not defined
 #endif
 #endif
 
